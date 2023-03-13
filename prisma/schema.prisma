@@ -50,7 +50,7 @@ model Order {
   email           String
   address         String?
   totalAmount     Decimal
-  discount        Decimal
+  discount        Decimal @default(0)
   deliveryDate    DateTime
   status          OrderStatus   @default(PENDING)
   createdAt       DateTime      @default(now())
@@ -91,7 +91,7 @@ model PaymentMethod {
 
 model Product {
   id          String        @id @default(uuid())
-  name        String
+  name        String @unique
   thumbnail   String
   description String
   price       Decimal
@@ -112,7 +112,7 @@ model Product {
 model Supplier {
   id          String @id @default(uuid())
   name        String @unique
-  email       String
+  email       String 
   phone       String
   address     String
   description String
@@ -137,7 +137,8 @@ model ProductCategory {
   name                 String                 @unique
   thumbnail            String
   description          String
-  Product_Has_Category Product_Has_Category[]
+  
+  product_has_categories Product_Has_Category[]
 
   @@map("productcategory")
 }
